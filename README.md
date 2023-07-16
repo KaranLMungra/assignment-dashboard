@@ -8,9 +8,8 @@
 - *Database* - sqlite3
 
 ## Setup
-- First execute command `npm install prisma --save-dev`.
-- Then go to the root directory of the project.
-- Install all the dependencies by running `npm install`.
+- Go to the root directory of the project.
+- Execute command `npm install prisma --save-dev` to install all the dependencies.
 
 ## Run Server
 

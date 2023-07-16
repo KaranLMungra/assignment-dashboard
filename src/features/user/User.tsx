@@ -30,10 +30,10 @@ export function User() {
     dispatch(edit(_user));
     return navigate('/user/update');
   }
-  async function handleDelete(_user: UserType) {
+  function handleDelete(_user: UserType) {
     setIsDeleting(true);
     setIDs(ids.concat([_user.id]));
-    await fetch(`/users/${_user.id}`, {
+    fetch(`/users/${_user.id}`, {
       method: 'DELETE',
       mode: 'cors',
     }).then((res) => {
@@ -64,22 +64,19 @@ export function User() {
             </thead>
             <tbody>
               {users.map((user: UserType) => (
-                <tr key={user.id}>
-                  <td>{user.id}</td>
-                  <td>{user.name}</td>
-                  {isDeleting && ids.find((v) => v === user.id) ?
-                    <div className="hover-text">
-                      <button style={{ backgroundColor: 'red' }} disabled >Record Deleted</button>
-                      <span className="tooltip-text">Refresh to see change</span>
-                    </div>
-                    :
+                isDeleting && ids.find((v) => v === user.id) ?
+                 <></>
+                  :
+                  <tr key={user.id}>
+                    <td>{user.id}</td>
+                    <td>{user.name}</td>
                     <td className="action-buttons button-group">
                       <button onClick={() => handleView(user)}>View</button>
                       <button onClick={() => handleEdit(user)}>Edit</button>
                       <button onClick={() => handleDelete(user)}>Delete</button>
                     </td>
-                  }
-                </tr>)
+                  </tr>
+              )
               )}
             </tbody>
           </table>)
